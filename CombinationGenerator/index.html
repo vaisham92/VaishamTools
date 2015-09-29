@@ -1,0 +1,107 @@
+<html>
+<head>
+    <!--Import Google Icon Font-t">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/icon.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/sticky-footer.css" media="screen,projection"/>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/ng-csv.js"></script>
+    <script type="text/javascript" src="js/ng-csv.min.js"></script>
+    <script type="text/javascript" src="js/angular-sanitize.min.js"></script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="index.js"></script>
+</head>
+<body>
+<header>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper teal darken-1">
+                <a class="brand-logo teal darken-1 center">Combinations Generator</a>
+            </div>
+        </nav>
+    </div>
+</header>
+<main>
+    <div ng-app="Generator" ng-controller="defaultCtrl">
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input id="Entries" ng-model="numberOfEntities" type="text" class="validate">
+                        <label for="Entries">Number of Entities</label>
+                        <a ng-click="createEntities()" class="waves-effect waves-light btn tooltipped"
+                           data-position="bottom" data-delay="50" data-tooltip="Entities are individual modules">Create
+                            Entities</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div ng-repeat="(entityIndex, entity) in entities">
+                        <div class="section">
+                            <ul class="col s3">
+                                <input ng-model="entity.name" type="text" class="validate">
+                                <a ng-click="addValue(entityIndex)" class="waves-effect waves-light btn">+</a>
+                                <a ng-click="popValue(entityIndex)" class="btn waves-effect waves-light red">-</a>
+                            </ul>
+                            <ul class="col s3">
+                                <div ng-repeat="value in entity.values track by $index">
+                                    <input ng-model="entity.values[$index]" type="text" class="validate">
+                                </div>
+                            </ul>
+                        </div>
+                        <ul class="col s12">
+                            <div class="divider"></div>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row center">
+                    <a href="" ng-click="createCombinations()" class="btn-large waves-effect waves-light red tooltipped"
+                       data-position="bottom" data-delay="50"
+                       data-tooltip="Creates various combinations for these entities and their values">Create
+                        Combinations</a>
+                </div>
+            </form>
+            <table class="striped centered col s12">
+                <thead>
+                <tr>
+                    <th ng-repeat="header in headers">{{header}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="combination in combinations">
+                    <td ng-repeat="value in combination track by $index">{{value}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="row center">
+            <a class="waves-effect waves-light btn"
+                    ng-csv="combinations" csv-header="headers" filename="{{filename}}" field-separator="{{separator}}"
+                    decimal-separator="{{decimalSeparator}}"><i class="material-icons left">import_export</i>Export as .csv</a>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="page-footer teal darken-1">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h5 class="white-text">Test case combinations generator</h5>
+
+                <p class="grey-text text-lighten-4">
+                    This tool can be used to generate various combinations of modules. This is the <b>brute force</b> approach
+                    and can be used along with pair wise testing for better usability.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2015 Created by Vaishampayan Reddy
+        </div>
+    </div>
+</footer>
+</body>
+</html>
