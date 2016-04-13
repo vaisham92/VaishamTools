@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2015 12:25:57 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.vaisham.perf.autogen.Consolidatedreport" table="consolidatedreport">
+        <composite-id name="id" class="org.vaisham.perf.autogen.ConsolidatedreportId">
+            <key-property name="projectId" type="int">
+                <column name="project_id" />
+            </key-property>
+            <key-property name="scenarioId" type="int">
+                <column name="scenario_id" />
+            </key-property>
+            <key-property name="year" type="int">
+                <column name="year" />
+            </key-property>
+            <key-property name="month" type="string">
+                <column name="month" length="18" />
+            </key-property>
+        </composite-id>
+        <property name="averageResponseTime" type="string">
+            <column name="averageResponseTime" length="50" not-null="true" />
+        </property>
+        <property name="maximumThroughput" type="string">
+            <column name="maximumThroughput" length="50" not-null="true" />
+        </property>
+        <property name="transactionCount" type="string">
+            <column name="transactionCount" length="50" not-null="true" />
+        </property>
+        <property name="cpuUtilization" type="string">
+            <column name="cpuUtilization" length="50" not-null="true" />
+        </property>
+        <property name="lastModifiedDate" type="timestamp">
+            <column name="lastModifiedDate" length="19"/>
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="createdDate" length="19"/>
+        </property>
+        <property name="isDeleted" type="boolean">
+            <column name="isDeleted" not-null="true" />
+        </property>
+        <property name="comments" type="string">
+            <column name="comments" length="400" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
